@@ -69,20 +69,21 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
     //     );
     // }
         _safeMint(glizzyOwner, newItemId);/// mint to address(glizzyOwner) the new nft(newItemId)
-        _setTokenURI(newItemId, tokenURI); ///this needs to be implemented on our own atm... possible solution https://ethereum.stackexchange.com/questions/93917/function-settokenuri-in-erc721-is-gone-in-openzeppelin-0-8-0-contracts
+        _setTokenURI(newItemId, tokenURI); ///this needs to be implemented on our own atm... we just need to set the TokenURI by overriding tokenURI method with our required logic. 
+        // possible solution https://ethereum.stackexchange.com/questions/93917/function-settokenuri-in-erc721-is-gone-in-openzeppelin-0-8-0-contracts
 
         //the randomnumber we generate will be used to pick a randombreed(for now)... this can be abstracted to generate all sorts of rndom qualities and traits but this is a basic implementation of the concept
         //use modulo operator to get number from random number that will be 0,1 or 2(len of sausage array)... modulo% divides random number by len.sausageArray generating an index 
         //that index will determine which glizzy its gonna be bc of the enum declaration on ln8
         //so sausage of type sausage is init by calling the % operator on the randomnumber from VRF generating an index... creating an object 
         //obj sausageAttr = Sausage[index] 
-        //ex return Sausage[0] is a Coney.
+        //ex return Sausage[0] is a Coney
         Sausage sausageAttr = Sausage(randomNumber % 3);
 
         //map randomized sausage to tokenId(NFT)
         //future implementations would be a struct rather than individual mappings
         //sausage[NFT]
-        tokenIdToSausage[newItemId] = sausage;
+        tokenIdToSausage[newItemId] = sausageAttr;
 
         //testing and iter token counter
         requestIdToTokenId = newItemId;

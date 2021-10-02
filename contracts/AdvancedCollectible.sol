@@ -77,7 +77,7 @@ contract AdvancedCollectible is ERC721, VRFConsumerBase {
         //that index will determine which glizzy its gonna be bc of the enum declaration on ln8
         //so sausage of type sausage is init by calling the % operator on the randomnumber from VRF generating an index... creating an object 
         //obj sausageAttr = Sausage[index] 
-        //ex return Sausage[0] is a Coney
+        //ex Sausage[0] returns  sausageAttr[Coney]
         Sausage sausageAttr = Sausage(randomNumber % 3);
 
         //map randomized sausage to tokenId(NFT)
